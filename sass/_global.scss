@@ -1,0 +1,43 @@
+@import "varibles";
+@import "mixins";
+* {
+  margin: 0;
+  border: 0;
+}
+html {
+  font-size: 16px;
+}
+body {
+  background-color: black;
+  background: url("images/../../nyt-logo.svg") no-repeat;
+  position: relative;
+  margin:0 auto;
+}
+
+.section {
+  background-color: grey;
+  color: red;
+  padding: 15px;
+  border: 1px solid black;
+  display: none;
+}
+
+.section:hover {
+
+  display: none;
+  height: 100vh;
+
+
+}
+
+.section:hover a{
+  display:inline-block;
+  height: 100vh;
+
+}
+.showtime {
+  font-size: 14px;
+  display:flex;
+  flex: row wrap;
+
+}

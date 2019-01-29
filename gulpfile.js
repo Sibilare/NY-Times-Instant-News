@@ -2,41 +2,58 @@ const gulp = require("gulp");
 const uglifycss = require("gulp-uglifycss");
 const rename = require("gulp-rename");
 const terser = require("gulp-terser");
-const browserSync = require("browser-sync").create();
 const eslint = require("gulp-eslint");
+const browserSync = require("browser-sync").create();
+const sass = require("gulp-sass");
+const autoprefixer = require("gulp-autoprefixer");
+const prettyError = require("gulp-prettyerror");
 
-// eslint
+// Task to compile and minifying Sass
 
-gulp.task("lint", () => {
+gulp.task("sass", function() {
   return gulp
-    .src(["./js/*.js"])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
-
-// Terser
-
-gulp.task("scripts", function() {
-  return gulp
-    .src("./js/*.js") // What files do we want gulp to consume?
-    .pipe(terser()) // Call the terser function on these files
-    .pipe(rename({ extname: ".min.js" })) // Rename the uglified file
-    .pipe(gulp.dest("./build/js")); // Where do we put the result?
-});
-
-// Task to minify CSS
-gulp.task("css", function() {
-  return gulp
-    .src("./css/*.css")
+    .src("sass/*.scss")
+    .pipe(prettyError())
+    .pipe(sass())
+    .pipe(
+      autoprefixer({
+        browsers: ["last 2 versions"]
+      })
+    )
+    .pipe(gulp.dest("build/css"))
     .pipe(uglifycss())
     .pipe(rename({ extname: ".min.css" }))
-    .pipe(gulp.dest("./build/css"));
+    .pipe(gulp.dest("build/css"));
+});
+gulp.task("lint", function() {
+  return (
+    gulp
+      .src(["js/*.js"])
+      // Also need to use it here...
+      .pipe(prettyError())
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError())
+  );
 });
 
+gulp.task(
+  "scripts",
+  gulp.series("lint", function() {
+    return gulp
+      .src("js/*.js")
+      .pipe(terser())
+      .pipe(
+        rename({
+          extname: ".min.js"
+        })
+      )
+      .pipe(gulp.dest("build/js"));
+  })
+);
 // Task to watch for changes to CSS files
 gulp.task("watch", function(done) {
-  gulp.watch("css/*.css", gulp.series("css"));
+  gulp.watch("sass/*.scss", gulp.series("sass"));
   gulp.watch("js/*.js", gulp.series("scripts"));
   done();
 });
@@ -49,7 +66,9 @@ gulp.task("browser-sync", function(done) {
     }
   });
 
-  gulp.watch("build/css/*.css").on("change", browserSync.reload);
+  gulp
+    .watch(["build/css/*.css", "build/js/*.js"])
+    .on("change", browserSync.reload);
 
   done();
 });

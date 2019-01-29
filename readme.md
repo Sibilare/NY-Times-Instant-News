@@ -7,4 +7,5 @@ software:
     mininify CSS and JS scripts (Terser)
     Eslint
 
+Used break points for Mobile 480px
     

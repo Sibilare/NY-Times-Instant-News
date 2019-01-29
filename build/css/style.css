@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  border: 0; }
+
+html {
+  font-size: 16px; }
+
+body {
+  background-color: yellow;
+  position: relative; }
