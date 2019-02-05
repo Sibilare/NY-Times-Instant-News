@@ -36,16 +36,16 @@ $(function() {
       searchData = website + theChosenOne + apikey;
       console.log(data);
     });
+    $(function(data) {
+      do {
+        document.append("showtime" + data.results[counter].title).innerHTML;
+        document.append("showtime" + data.results[counter].multimedia[0].url)
+          .innerHTML;
+        document.append("showtime" + data.results[counter].url).innerHTML;
+        counter++;
+        console.log(counter);
+      } while (counter <= 12);
+    });
   });
 });
 
-$(function(data) {
-  do {
-    document.append("showtime" + havedata.results[counter].title).innerHTML;
-    document.append("showtime" + havedata.results[counter].multimedia[0].url)
-      .innerHTML;
-    document.append("showtime" + havedata.results[counter].url).innerHTML;
-    counter++;
-    console.log(counter);
-  } while (counter <= 13);
-});

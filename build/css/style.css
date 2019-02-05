@@ -1,3 +1,22 @@
+@import url(global.min.css);
+@media screen and (min-size: 600px) {
+  font-size: 14px;
+  margin: 20px;
+  padding: 20px;
+  background: url("/../../images/nyt-logo.svg") no-repeat; }
+
+@media screen and (min-size: 1000px) {
+  background: url("/../../images/nyt-logo.svg") no-repeat; }
+
+@media screen and (min-size: 600px) {
+  font-size: 14px;
+  margin: 20px;
+  padding: 20px;
+  background: url("/../../images/nyt-logo.svg") no-repeat; }
+
+@media screen and (min-size: 1000px) {
+  background: url("/../../images/nyt-logo.svg") no-repeat; }
+
 * {
   margin: 0;
   border: 0; }
@@ -6,5 +25,33 @@ html {
   font-size: 16px; }
 
 body {
-  background-color: yellow;
-  position: relative; }
+  background: black; }
+
+.section {
+  background-color: grey;
+  color: red;
+  padding: 15px;
+  border: 1px solid black;
+  display: none; }
+
+.section:hover {
+  display: none;
+  height: 100vh; }
+
+.section:hover a {
+  display: inline-block;
+  height: 100vh; }
+
+.article {
+  background-image: url("../../images/nyt-logo.svg") no-repeat;
+  position: relative;
+  margin: 0 auto; }
+
+.showtime {
+  font-size: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: row;
+      -ms-flex: row wrap;
+          flex: row wrap; }
