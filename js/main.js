@@ -15,7 +15,6 @@
 // 6. Hide the loader again
 //  #sections is in the HTML pull down menu on where the button is
 
-
 var counter;
 var theChosenOne;
 var searchData;
@@ -26,14 +25,14 @@ console.log("hello");
 $(function() {
   $("body").on("change", "#mainbutton", function() {
     theChosenOne = $("#mainbutton").val();
-    counter=0;
+    counter = 0;
     $.ajax({
       method: "GET",
       url: website + theChosenOne + apikey,
       dataType: "json"
     }).done(function(data) {
-        console.log(data.results);
-        console.log(counter);
+      console.log(data.results);
+      console.log(counter);
       searchData = website + theChosenOne + apikey;
       console.log(data);
     });
@@ -42,11 +41,11 @@ $(function() {
 
 $(function(data) {
   do {
-    document.append("showtime" + results[counter].title).innerHTML;
-    document.append("showtime" + results[counter].multimedia[0].url).innerHTML;
-    document.append("showtime" + results[counter].url).innerHTML;
-    counter++
+    document.append("showtime" + havedata.results[counter].title).innerHTML;
+    document.append("showtime" + havedata.results[counter].multimedia[0].url)
+      .innerHTML;
+    document.append("showtime" + havedata.results[counter].url).innerHTML;
+    counter++;
     console.log(counter);
-  }
-  while (counter <= 13);
-})
+  } while (counter <= 13);
+});
